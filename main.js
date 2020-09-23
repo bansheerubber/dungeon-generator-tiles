@@ -22,7 +22,7 @@ app.get("/tile", (request, response) => {
 	if(
 		(
 			ipRequestMap[ip]
-			&& Date.now() - ipRequestMap[ip] < 200
+			&& Date.now() - ipRequestMap[ip] < 33
 		) || (
 			ipRequestMap[ip]
 			&& Date.now() - ipBan[ip] < 60000 // ban people for an entire minute if they're downloading too fast
@@ -60,7 +60,7 @@ app.get("/tile", (request, response) => {
 })
 
 app.get("/tile_metadata", (request, response) => {
-	response.send(`${metadata.maxXIndex} ${metadata.maxYIndex} ${metadata.pictureWidth} ${metadata.pictureHeight} ${metadata.tileSize}`)
+	response.send(`${metadata.maxXIndex} ${metadata.maxYIndex} ${metadata.pictureWidth} ${metadata.pictureHeight} ${metadata.tileSize}\r\n`)
 })
 
 app.listen(27999, () => {
