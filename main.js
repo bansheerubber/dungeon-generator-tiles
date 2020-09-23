@@ -7,7 +7,7 @@ const metadataSplit = metadataRaw.split("\n")
 const metadata = {
 	imageName: metadataSplit[0],
 	maxXIndex: parseInt(metadataSplit[1].split(" ")[0]),
-	maxYIndex: parseInt(metadataSplit[2].split(" ")[1]),
+	maxYIndex: parseInt(metadataSplit[1].split(" ")[1]),
 	pictureWidth: parseInt(metadataSplit[2].split(" ")[0]),
 	pictureHeight: parseInt(metadataSplit[2].split(" ")[1]),
 	tileSize: parseInt(metadataSplit[3]),
@@ -40,7 +40,9 @@ app.get("/tile", (request, response) => {
 	const path = `tiles/${metadata.imageName}_${x}_${y}.png`
 
 	if(
-		request.query.x.match(pattern)
+		request.query.x
+		&& request.query.y
+		&& request.query.x.match(pattern)
 		&& request.query.y.match(pattern)
 		&& !isNaN(x)
 		&& !isNaN(y)
